@@ -21,13 +21,14 @@ function stripe_webhooks_callback() {
     }
     // For additional security - retrieve event data from ID
     if (is_object($event) && isset($event->id)) {
-      $event = Stripe_Event::retrieve($event->id);
+      $event = \Stripe\Event::retrieve($event->id);
       if (is_object($event) && isset($event->id)) {
         module_invoke_all('stripe_webhook', $event);
         return 'OK';
       }
     }
   }
+
   // Something went wrong if we got here so return 404. If it is in fact
   // coming from Stripe, they will attempt to resend it for 3 days.
   drupal_not_found();

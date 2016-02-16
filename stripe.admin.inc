@@ -19,7 +19,7 @@ function stripe_admin_keys() {
   $publishable = stripe_get_key("publishable");
   if ($secret && $publishable) {
     if (($library = libraries_load('stripe')) && !empty($library['loaded'])) {
-      $info = Stripe_Account::retrieve();
+      $info = \Stripe\Account::retrieve();
       $account_information = "<label>Email:</label> ".$info->email;
       $account_information .= "<br /><label>Statement Descriptor:</label> ".$info->statement_descriptor;
       $account_information .= "<br /><label>Details Submitted:</label> ".$info->details_submitted;

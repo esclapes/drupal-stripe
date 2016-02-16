@@ -367,7 +367,7 @@ function stripe_libraries_info() {
       'pattern' => '/([0-9a-zA-Z\.-]+)/',
       'lines' => 1,
     ),
-    'files' => array('php' => array('lib/Stripe.php')),
+    'files' => array('php' => array('init.php')),
     'callbacks' => array('post-load' => array('stripe_libraries_postload_callback')),
   );
   return $libraries;
@@ -390,8 +390,7 @@ function stripe_libraries_postload_callback($library, $version = NULL, $variant 
     $status = variable_get('stripe_key_status', 'test');
     $secret_key_name = 'stripe_' . $status . '_secret';
     $secret_key = variable_get($secret_key_name, '');
-
-    empty($secret_key) ? NULL : Stripe::setApiKey($secret_key);
+    empty($secret_key) ? NULL : \Stripe\Stripe::setApiKey($secret_key);
   }
 }
 
