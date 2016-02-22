@@ -107,7 +107,7 @@
      */
     extractTokenData: function(form) {
     	var data = {};
-    	$(':input[data-stripe]').each(function() {
+      $(':input[data-stripe]').not('[data-stripe="token"]').each(function() {
     	  var input = $(this);
     	  data[input.attr('data-stripe')] = input.val();
     	});
