@@ -6,7 +6,7 @@
  */
 
 /**
- * Menu callback: configure Stripe API Keys
+ * Menu callback: configure Stripe API Keys.
  */
 function stripe_admin_keys() {
   $keys = array(
@@ -20,16 +20,18 @@ function stripe_admin_keys() {
   if ($secret && $publishable) {
     if (($library = libraries_load('stripe')) && !empty($library['loaded'])) {
       $info = \Stripe\Account::retrieve();
-      $account_information = "<label>Email:</label> ".$info->email;
-      $account_information .= "<br /><label>Statement Descriptor:</label> ".$info->statement_descriptor;
-      $account_information .= "<br /><label>Details Submitted:</label> ".$info->details_submitted;
-      $account_information .= "<br /><label>Charge Enabled:</label> ".$info->charge_enabled;
-      $account_information .= "<br /><label>Transfer Enabled:</label> ".$info->transfer_enabled;
-      $account_information .= "<br /><label>currencies_supported:</label> ".implode(", ", $info->currencies_supported);
-    } else {
+      $account_information = "<label>Email:</label> " . $info->email;
+      $account_information .= "<br /><label>Statement Descriptor:</label> " . $info->statement_descriptor;
+      $account_information .= "<br /><label>Details Submitted:</label> " . $info->details_submitted;
+      $account_information .= "<br /><label>Charge Enabled:</label> " . $info->charge_enabled;
+      $account_information .= "<br /><label>Transfer Enabled:</label> " . $info->transfer_enabled;
+      $account_information .= "<br /><label>currencies_supported:</label> " . implode(", ", $info->currencies_supported);
+    }
+    else {
       $account_information = t("Failed to load Stripe library.");
     }
-  } else {
+  }
+  else {
     $account_information = t("Please configure the stripe keys below to see your acccount information");
   }
 
@@ -55,7 +57,7 @@ function stripe_admin_keys() {
     '#default_value' => $active_key,
     '#options' => array(
       'test' => t('Test'),
-      'live' => t('Live')
+      'live' => t('Live'),
     ),
     '#description' => t('This determines which set of keys you are using.'),
     '#required' => TRUE,
@@ -75,7 +77,7 @@ function stripe_admin_keys() {
     '#type' => 'checkbox',
     '#title' => t('Log Webhooks'),
     '#description' => t('This will log all valid webhook requests with their event data to the db log.'),
-    '#default_value' => variable_get('stripe_log_webhooks', 0)
+    '#default_value' => variable_get('stripe_log_webhooks', 0),
   );
 
   return system_settings_form($form);

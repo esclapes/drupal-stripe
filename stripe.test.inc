@@ -51,7 +51,7 @@ function stripe_admin_test($form, $form_state) {
 }
 
 /**
- * AJAX callback for dynamic address
+ * AJAX callback for dynamic address.
  */
 function stripe_admin_test_ajax($form, &$form_state) {
   $form_state['rebuild'] = TRUE;
@@ -65,10 +65,12 @@ function stripe_admin_test_submit($form, &$form_state) {
   if (($library = libraries_load('stripe')) && !empty($library['loaded'])) {
     try {
       $charge = \Stripe\Charge::create(array(
-          "amount" => $form_state['values']['amount'], // amount in cents, again
-          "currency" => "usd",
-          "card" => $form_state['values']['stripe']['stripe_token'],
-          "description" => "Test Charge from " . variable_get('site_name', 'My Drupal Site'))
+      // Amount in cents, again.
+        "amount" => $form_state['values']['amount'],
+        "currency" => "usd",
+        "card" => $form_state['values']['stripe']['stripe_token'],
+        "description" => "Test Charge from " . variable_get('site_name', 'My Drupal Site'),
+      )
       );
       drupal_set_message("Success! Card was successfully charged for the amount of " . check_plain($form_state['values']['amount']));
     }

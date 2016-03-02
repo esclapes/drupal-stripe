@@ -15,11 +15,11 @@ function stripe_webhooks_callback() {
     // Log event in watchdog.
     if (variable_get('stripe_log_webhooks', 0) == 1) {
       watchdog('stripe', 'Stripe Webhook %type: <pre>@event</pre>', array(
-        '%type' =>  (is_object($event) && isset($event->type)) ? $event->type : t('<undefined>'),
+        '%type' => (is_object($event) && isset($event->type)) ? $event->type : t('<undefined>'),
         '@event' => print_r($event, TRUE),
       ), WATCHDOG_DEBUG);
     }
-    // For additional security - retrieve event data from ID
+    // For additional security - retrieve event data from ID.
     if (is_object($event) && isset($event->id)) {
       $event = \Stripe\Event::retrieve($event->id);
       if (is_object($event) && isset($event->id)) {

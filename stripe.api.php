@@ -16,9 +16,8 @@
  *
  * Event types and descriptions are listed here: https://stripe.com/docs/api#event_types
  *
- * @param $event
- * An object of event data sent in from Stripe.
- *
+ * @param object $event
+ *   An object of event data sent in from Stripe.
  */
 function hook_stripe_webhook($event) {
   switch ($event->type) {
