@@ -314,9 +314,9 @@ function stripe_element_validate_empty($element, $form_state, $form) {
   // Log a watchdog message the first time only. No need to log two messages.
   if (!empty($element['#value']) && !$logged) {
     // Set an error on the first element this happened on.
-    form_error($element, 'There was a problem processing your payment. For '   .
-      'your own protection, it is recommended you do NOT '  .
-      'attempt to re-enter your payment information.');
+    form_error($element, t('There was a problem processing your payment.
+      For your own protection, it is recommended you do NOT attempt to re-enter
+      your payment information.'));
     // Now log a watchdog alert.
     $message = 'Credit Card information is being posted to your server. '      .
       'Please disable Stripe module immediately and submit a bug '    .
