@@ -35,3 +35,15 @@ function _stripe_requirement_check() {
     );
   }
 }
+
+/**
+ * Implements hook_uninstall().
+ */
+function stripe_uninstall() {
+  variable_del('stripe_key_status');
+  variable_del('stripe_test_secret');
+  variable_del('stripe_test_publishable');
+  variable_del('stripe_live_secret');
+  variable_del('stripe_live_publishable');
+  variable_del('stripe_log_webhooks');
+}
